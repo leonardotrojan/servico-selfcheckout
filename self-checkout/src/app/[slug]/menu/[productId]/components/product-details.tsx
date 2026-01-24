@@ -67,7 +67,7 @@ const ProductDetails = ({product}: ProductDetailsProps) => {
              </div>
                 {/* NOME DO PRODUTO */}
             <h2 className="mt-1 font-xs font-semibold">
-                {product.restaurant.name}
+                {product.name}
             </h2>
 
             {/* PREÇO E QUANTIDADE */}
