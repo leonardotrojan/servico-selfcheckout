@@ -7,9 +7,10 @@ import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { CartContext } from "../contexts/cart";
+import Link from "next/link";
 
 interface RestaurantHeaderProps {
-    restaurant: Pick<Restaurant, 'coverImageUrl' | 'name'>
+    restaurant: Pick<Restaurant, 'coverImageUrl' | 'name' | 'slug'>
 }
 
 const RestaurantHeader = ({restaurant}: RestaurantHeaderProps) => {
@@ -32,14 +33,12 @@ const RestaurantHeader = ({restaurant}: RestaurantHeaderProps) => {
                  alt={restaurant.name}
                  className="object-cover"
                 />
-                <Button
-                 variant="secondary" 
-                 size="icon" 
-                 className="absolute top-4 right-4 rounded-full z-50"
-                 onClick={toggleCart}
+                <Link
+                 href={`/${restaurant.slug}/orders`}
+                 className="absolute top-4 right-4 rounded-full z-50 bg-white p-2"
                 >
                    <ScrollTextIcon/>
-                </Button>
+                </Link>
             </div>
      );
 }

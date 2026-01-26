@@ -71,7 +71,7 @@ const OrderList = ({orders}: OrderListProps) => {
                             <p className="font-semibold text-sm">{order.restaurant.name}</p>
                         </div>
                         <Separator />
-                        <div space-y-2>
+                        <div className="space-y-2">
                             {order.orderProducts.map(orderProduct => (
                             <div key={orderProduct.id} className="flex items-center gap-2">
                                 <div className="h-5 w-5 flex items-center justify-center rounded-full bg-gray-400 text-white text-xs font-semibold">
