@@ -19,12 +19,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { PatternFormat } from "react-number-format"
 import { createOrder } from "../actions/create-order";
-import { useParams, useSearchParams } from "next/navigation";
+import { redirect, useParams, useSearchParams } from "next/navigation";
 import { ConsumptionMethod } from "@prisma/client";
 import { useContext, useTransition } from "react";
 import { CartContext } from "../contexts/cart";
 import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
+import { createStripeCheckout } from "../actions/create-stripe-checkout";
+import { loadStripe } from "@stripe/stripe-js"
 
 const formSchema = z.object({
     name: z.string().trim().min(1, {
@@ -64,7 +66,6 @@ const FinishOrderDialog = ({open, onOpenChange}: FinishOrderDialogProps) => {
                 "consumptionMethod"
             ) as ConsumptionMethod
 
-            startTransition(async () => {
                 await createOrder({
                 consumptionMethod,
                 customerCPF: data.cpf,
@@ -72,10 +73,17 @@ const FinishOrderDialog = ({open, onOpenChange}: FinishOrderDialogProps) => {
                 products,
                 slug,
             })
-                onOpenChange(false)
-                toast.success("Pedido finalizado com sucesso")
-            })
-            
+                const {sessionId} = await createStripeCheckout({products})
+                if (!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY) {
+                    return;
+                }
+                const stripe = await loadStripe(
+                    process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+                )
+                stripe?.redirectToCheckout({
+                    sessionId: sessionId
+                })
+
         } catch (error) {
             console.error(error)
         }
