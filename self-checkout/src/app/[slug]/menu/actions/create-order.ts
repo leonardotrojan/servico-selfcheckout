@@ -4,6 +4,7 @@ import { db } from "@/lib/prisma"
 import {ConsumptionMethod} from "@prisma/client"
 import { removeCpfPunctuation } from "../helpers/cpf"
 import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 
 interface createOrderInput {
@@ -40,7 +41,7 @@ export const createOrder = async (input: createOrderInput) => {
         price: productsWithPrices.find((p) => p.id === product.id)!.price
     }))
 
-    await db.order.create({
+    const order = await db.order.create({
         data: {
             status: 'PENDING',
             customerName: input.customerName,
@@ -58,5 +59,8 @@ export const createOrder = async (input: createOrderInput) => {
             restaurantId: restaurant.id,
         }
     })
-    redirect(`/${input.slug}/orders?cpf=${removeCpfPunctuation(input.customerCPF)}`)
+    revalidatePath(`/${input.slug}/orders`)
+    // redirect(`/${input.slug}/orders?cpf=${removeCpfPunctuation(input.customerCPF)}`)
+
+    return order
 }
