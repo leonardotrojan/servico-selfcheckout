@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍔 Self Checkout
 
-## Getting Started
+Projeto de **autoatendimento (self-checkout)** inspirado em totens reais, desenvolvido para **portfólio**, com foco em **UI/UX**, **fluxo real de pedidos** e **boas práticas modernas com Next.js**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🎯 Objetivo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Demonstrar proficiência em:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js (App Router)
+- React e TypeScript
+- Client e Server Components
+- Componentização e hooks
+- Estilização com Tailwind e shadcn/ui
+- Validação de dados com Zod
+- Persistência de dados com Prisma e PostgreSQL
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧠 Sobre o Projeto
 
-To learn more about Next.js, take a look at the following resources:
+O sistema simula o fluxo real de um totem de autoatendimento:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Navegação pelo cardápio  
+- Seleção e gerenciamento de itens  
+- Finalização do pedido  
+- Persistência do pedido no banco  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> O foco do projeto é o **fluxo do pedido**, não a transação financeira.  
+> Não há gateway de pagamento integrado por decisão de escopo.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Tecnologias
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Front-end**
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+
+**Data / Back-end**
+- Prisma ORM
+- PostgreSQL (Neon)
+
+**Outros**
+- Zod
+
+> O acesso ao banco é feito via **Server Components / Server Actions**, sem uso de rotas REST tradicionais.
