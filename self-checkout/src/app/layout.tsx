@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased bg-zinc-900`}>
         <CartProvider>
           <div className="min-h-screen w-full flex justify-center">
-            <div className="w-[380px] min-h-screen">
+            <div className="w-full max-w-[430px] overflow-x-hidden min-h-screen">
               {children}
             </div>
           </div>
