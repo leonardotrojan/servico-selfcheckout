@@ -25,8 +25,6 @@ import { useContext, useTransition } from "react";
 import { CartContext } from "../contexts/cart";
 import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
-import { createStripeCheckout } from "../actions/create-stripe-checkout";
-import { loadStripe } from "@stripe/stripe-js"
 
 const formSchema = z.object({
     name: z.string().trim().min(1, {
@@ -66,22 +64,17 @@ const FinishOrderDialog = ({open, onOpenChange}: FinishOrderDialogProps) => {
                 "consumptionMethod"
             ) as ConsumptionMethod
 
-                 const order = await createOrder({
+            startTransition(async () =>{    
+            await createOrder({
                 consumptionMethod,
                 customerCPF: data.cpf,
                 customerName: data.name,
                 products,
                 slug,
             })
-                const {sessionId} = await createStripeCheckout({products, orderId: order.id})
-                if (!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY) return
-                const stripe = await loadStripe(
-                    process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
-                )
-
-                stripe?.redirectToCheckout({
-                    sessionId: sessionId
-                })
+            onOpenChange(false);
+            toast.success("Pedido finalizado com sucesso!")
+            })
             
         } catch (error) {
             console.error(error)

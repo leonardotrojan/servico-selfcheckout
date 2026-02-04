@@ -39,7 +39,9 @@ const OrdersPage = async ({searchParams}: OrdersPageProps) => {
         }
     })
     return ( 
-        <OrderList orders={orders}/>
+        <div className="bg-white">
+            <OrderList orders={orders}/>
+        </div>
      );
 }
  
