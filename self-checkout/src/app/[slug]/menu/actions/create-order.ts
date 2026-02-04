@@ -1,10 +1,12 @@
 'use server'
 
-import { db } from "@/lib/prisma"
 import {ConsumptionMethod} from "@prisma/client"
-import { removeCpfPunctuation } from "../helpers/cpf"
-import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
+
+import { db } from "@/lib/prisma"
+
+import { removeCpfPunctuation } from "../helpers/cpf"
 
 
 interface createOrderInput {

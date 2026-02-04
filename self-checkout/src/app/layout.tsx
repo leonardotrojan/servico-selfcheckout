@@ -1,8 +1,11 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "./globals.css";
-import { CartProvider } from "./[slug]/menu/contexts/cart";
+
 import { Toaster } from "@/components/ui/sonner";
+
+import { CartProvider } from "./[slug]/menu/contexts/cart";
 
 
 const poppins = Poppins({
